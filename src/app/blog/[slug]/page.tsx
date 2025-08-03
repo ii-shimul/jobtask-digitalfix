@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 interface Blog {
@@ -76,12 +77,12 @@ const Page = ({ params }: { params: { slug: string } }) => {
 					<p className="text-gray-700 leading-relaxed text-lg">{blog.body}</p>
 				</div>
 				<div className="mt-8 pt-4 border-t border-gray-200">
-					<a
+					<Link
 						href="/blog"
 						className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
 					>
 						← Back to all blog posts
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>
