@@ -14,8 +14,8 @@ const Page = ({ params }: { params: { slug: string } }) => {
 	const { slug } = params;
 	const [blog, setBlog] = useState<Blog | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
 
+	// Fetch the blog
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
 			.then((response) => {
@@ -30,33 +30,23 @@ const Page = ({ params }: { params: { slug: string } }) => {
 			})
 			.catch((error) => {
 				console.error("Error fetching blog:", error);
-				setError(error.message);
 				setLoading(false);
 			});
 	}, [slug]);
 
+	// Show loading if loading
 	if (loading) {
 		return (
-			<div className="container mx-auto p-4">
+			<div className="container mx-auto p-4 place-content-center text-center min-w-screen min-h-screen">
 				<div className="text-center">Loading blog post...</div>
 			</div>
 		);
 	}
 
-	if (error) {
-		return (
-			<div className="container mx-auto p-4">
-				<div className="text-center text-red-600">
-					<h1 className="text-2xl font-bold mb-2">Error</h1>
-					<p>{error}</p>
-				</div>
-			</div>
-		);
-	}
-
+	// Show error message if blog is not found
 	if (!blog) {
 		return (
-			<div className="container mx-auto p-4">
+			<div className="container mx-auto p-4 place-content-center text-center min-w-screen min-h-screen">
 				<div className="text-center">
 					<h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
 				</div>
@@ -65,7 +55,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
 	}
 
 	return (
-		<div className="container mx-auto p-4 max-w-4xl">
+		<div className="container mx-auto p-4 max-w-4xl mt-36">
 			<div className="bg-gray-400 rounded-lg shadow-lg p-8">
 				<div className="mb-4">
 					<span className="text-sm text-gray-500">
